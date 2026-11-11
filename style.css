@@ -1,17 +1,19 @@
 :root {
-  --bg: #f7f7fb;
-  --surface: #fff;
-  --text: #1b1d2a;
-  --muted: #5d6178;
-  --border: #e3e4ee;
-  --primary: #4f46e5;
-  --primary-hover: #4338ca;
-  --primary-soft: #eef0ff;
-  --focus: #f59e0b;
+  color-scheme: dark;
+  --bg: #161618;
+  --surface: #1f1f23;
+  --text: #e8e6e3;
+  --muted: #9a9aa3;
+  --border: #2e2e33;
+  --primary: #eeb4cf;
+  --primary-hover: #f5cadd;
+  --primary-soft: rgba(238, 180, 207, 0.1);
+  --on-primary: #1f1f23;
+  --focus: #f5cadd;
   --radius: 14px;
   --pill: 999px;
-  --shadow-sm: 0 1px 2px rgba(20, 22, 40, 0.06);
-  --shadow-md: 0 10px 28px -12px rgba(20, 22, 40, 0.22);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 14px 32px -14px rgba(0, 0, 0, 0.6);
   --t: 220ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
@@ -91,8 +93,8 @@ ul {
   top: -48px;
   z-index: 10;
   padding: 8px 14px;
-  background: var(--text);
-  color: #fff;
+  background: var(--primary);
+  color: var(--on-primary);
   border-radius: 8px;
   transition: top var(--t);
 }
@@ -178,13 +180,13 @@ ul {
 .filter-pill.is-active {
   background: var(--primary);
   border-color: var(--primary);
-  color: #fff;
-  box-shadow: 0 6px 16px -6px rgba(79, 70, 229, 0.6);
+  color: var(--on-primary);
+  box-shadow: 0 6px 18px -6px rgba(238, 180, 207, 0.3);
 }
 
 .filter-pill.is-active .filter-pill__count {
-  background: rgba(255, 255, 255, 0.22);
-  color: #fff;
+  background: rgba(31, 31, 35, 0.15);
+  color: var(--on-primary);
 }
 
 .results-summary {
@@ -207,8 +209,8 @@ ul {
 }
 
 .role-card {
-  --accent: #2563eb;
-  --accent-soft: #e8f0ff;
+  --accent: #a7c4ec;
+  --accent-soft: rgba(167, 196, 236, 0.1);
   position: relative;
   height: 100%;
   display: flex;
@@ -225,9 +227,9 @@ ul {
   animation-delay: calc(var(--i, 0) * 50ms);
 }
 
-.role-card[data-department="Design"] { --accent: #db2777; --accent-soft: #fdecf4; }
-.role-card[data-department="Marketing"] { --accent: #d97706; --accent-soft: #fff4e2; }
-.role-card[data-department="Product"] { --accent: #059669; --accent-soft: #e5f7f0; }
+.role-card[data-department="Design"] { --accent: #eeb4cf; --accent-soft: rgba(238, 180, 207, 0.1); }
+.role-card[data-department="Marketing"] { --accent: #ecd09a; --accent-soft: rgba(236, 208, 154, 0.1); }
+.role-card[data-department="Product"] { --accent: #a3d9bf; --accent-soft: rgba(163, 217, 191, 0.1); }
 
 .role-card::before {
   content: "";
@@ -244,7 +246,7 @@ ul {
 .role-card:focus-within {
   transform: translateY(-4px);
   box-shadow: var(--shadow-md);
-  border-color: transparent;
+  border-color: rgba(238, 180, 207, 0.25);
 }
 
 .role-card:hover::before,
@@ -336,10 +338,10 @@ ul {
 }
 
 .es-bg { fill: var(--primary-soft); }
-.es-case { fill: #fff; stroke: var(--primary); }
+.es-case { fill: var(--surface); stroke: var(--primary); }
 .es-handle { fill: none; stroke: var(--primary); }
 .es-line { stroke: var(--primary); opacity: 0.35; }
-.es-lens { fill: #fff; stroke: var(--text); }
+.es-lens { fill: var(--surface); stroke: var(--text); }
 .es-lens-handle { stroke: var(--text); stroke-width: 4; }
 
 .empty-state__title {
@@ -359,7 +361,7 @@ ul {
   border: none;
   border-radius: var(--pill);
   background: var(--primary);
-  color: #fff;
+  color: var(--on-primary);
   font-weight: 600;
   cursor: pointer;
   transition: background-color var(--t), transform var(--t);
