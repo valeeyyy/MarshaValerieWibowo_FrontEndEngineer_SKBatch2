@@ -62,11 +62,6 @@ const ROLES = [
   },
 ];
 
-const ICONS = {
-  Location: '<path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',
-  "Employment type": '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
-};
-
 const $ = (id) => document.getElementById(id);
 const filterList = $("filter-list");
 const roleGrid = $("role-grid");
@@ -76,7 +71,7 @@ const summary = $("results-summary");
 let active = ALL;
 
 const rolesFor = (dept) => (dept === ALL ? ROLES : ROLES.filter((r) => r.department === dept));
-const plural = (n) => `${n} ${n === 1 ? "role" : "roles"}`;
+const noun = (n) => (n === 1 ? "role" : "roles");
 
 function el(tag, className, text) {
   const node = document.createElement(tag);
@@ -94,7 +89,7 @@ function renderFilters() {
       button.dataset.department = dept;
       button.setAttribute(
         "aria-label",
-        `${dept === ALL ? "Show all departments" : `Filter by ${dept}`}, ${plural(count)}`
+        `${dept === ALL ? "Show all departments" : `Filter by ${dept}`}, ${count} ${noun(count)}`
       );
       const badge = el("span", "filter-pill__count", count);
       badge.setAttribute("aria-hidden", "true");
@@ -106,10 +101,11 @@ function renderFilters() {
   );
 }
 
-function metaItem(label, value) {
+function metaItem(iconName, label, value) {
   const dt = el("dt");
-  dt.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">${ICONS[label]}</svg>`;
-  dt.append(el("span", "visually-hidden", label));
+  const icon = el("i", `fa-solid fa-${iconName}`);
+  icon.setAttribute("aria-hidden", "true");
+  dt.append(icon, el("span", "visually-hidden", label));
   const item = el("div");
   item.append(dt, el("dd", "", value));
   return item;
@@ -126,7 +122,10 @@ function roleCard(role, index) {
   title.id = titleId;
 
   const meta = el("dl", "role-card__meta");
-  meta.append(metaItem("Location", role.location), metaItem("Employment type", role.type));
+  meta.append(
+    metaItem("location-dot", "Location", role.location),
+    metaItem("clock", "Employment type", role.type)
+  );
 
   card.append(
     el("span", "role-card__dept", role.department),
@@ -150,7 +149,7 @@ function render() {
   });
 
   const scope = active === ALL ? "across all departments" : `in <strong>${active}</strong>`;
-  summary.innerHTML = `Showing <strong>${roles.length}</strong> ${roles.length === 1 ? "role" : "roles"} ${scope}`;
+  summary.innerHTML = `Showing <strong>${roles.length}</strong> ${noun(roles.length)} ${scope}`;
 
   roleGrid.replaceChildren(...roles.map(roleCard));
   roleGrid.hidden = !roles.length;

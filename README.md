@@ -1,51 +1,47 @@
 # Role Explorer
 
-> Submission: MarshaValerieWibowo_FrontEndEngineer_SKBatch2
+Submission: MarshaValerieWibowo_FrontEndEngineer_SKBatch2
 
-A responsive job-role browser built with **only vanilla HTML, CSS and JavaScript** — no frameworks, libraries or build step. Users filter open positions by department using a row of pill buttons, and the role cards update instantly.
+Halaman daftar lowongan yang bisa difilter berdasarkan departemen. Dibuat dengan HTML, CSS, dan JavaScript biasa tanpa framework dan tanpa build step. Satu-satunya library eksternal adalah Font Awesome (lewat CDN) untuk ikon.
 
-## Features
+## Fitur
 
-- **Department filters** — "All", Engineering, Design, Marketing and Product, each showing a live role count. The active pill is clearly highlighted and exposed to assistive tech with `aria-pressed`.
-- **Responsive card grid** — CSS Grid with 1 column on mobile, 2 on tablet (≥ 640px) and 3 on desktop (≥ 1024px).
-- **Three UI states**
-  - **Default:** "All" is selected and every role is shown.
-  - **Filtered:** only roles in the selected department are shown.
-  - **Empty:** a department with no roles (Product, intentionally) shows an illustrated empty state with a "View all roles" button.
-- **Accessibility** — semantic landmarks (`header`, `nav`, `main`, `section`, `article`, `footer`), `aria-label`s on filter buttons, a polite live region announcing result counts, a skip link, visible focus styles and `prefers-reduced-motion` support.
-- **Polish** — card hover lift with a department-coloured accent bar, staggered fade-in on filter change, smooth transitions on pills and buttons.
+- Filter departemen: All, Engineering, Design, Marketing, dan Product. Tiap tombol menampilkan jumlah role-nya.
+- Kartu role tampil 1 kolom di mobile, 2 kolom mulai 640px, dan 3 kolom mulai 1024px.
+- Tiga kondisi tampilan:
+  - Default: "All" terpilih dan semua role tampil.
+  - Filtered: hanya role dari departemen yang dipilih.
+  - Empty: departemen tanpa role (sengaja Product) menampilkan pesan kosong dengan tombol "View all roles".
+- Tema gelap dan terang, bisa diganti lewat tombol di pojok kanan atas. Default-nya gelap.
+- Aksesibilitas: elemen semantik, `aria-pressed` dan `aria-label` pada tombol filter, live region untuk jumlah hasil, skip link, focus style yang jelas, dan dukungan `prefers-reduced-motion`.
 
-## Project structure
+## Struktur
 
 ```
-.
-├── index.html   # Semantic markup and static shells for the grid and empty state
-├── style.css    # Design tokens, layout, responsive grid, transitions
-├── script.js    # Mock data, filter state and DOM rendering
-└── README.md
+index.html   markup dan wadah statis untuk grid dan empty state
+style.css    variabel warna/tema, layout, grid responsif, transisi
+script.js    data role, state filter, dan render ke DOM
 ```
 
-## How to run
+## Cara menjalankan
 
-No install or build step is needed.
+Buka `index.html` langsung di browser. Ikon butuh koneksi internet karena dimuat dari CDN.
 
-1. Clone or download this folder.
-2. Open `index.html` in any modern browser (double-click it, or drag it into a browser window).
-
-Optionally, serve it locally:
+Kalau mau lewat server lokal:
 
 ```bash
 python3 -m http.server 8000
-# then visit http://localhost:8000
 ```
 
-## How it works
+lalu buka http://localhost:8000.
 
-- `DEPARTMENTS` and `ROLES` are declared separately in `script.js`, so a department can appear as a filter even when it has zero roles.
-- A single `active` value drives the UI. `setActive()` updates it, then `render()` refreshes the pill styles, the result summary, and the grid or the empty state.
-- Filter clicks use one delegated listener on the pill list.
-- All user-facing text is inserted with `textContent` and cards are built with `document.createElement`.
+## Catatan implementasi
 
-## Tools & AI Policy Note
+- `DEPARTMENTS` dan `ROLES` dipisah di `script.js`, jadi sebuah departemen tetap muncul sebagai filter walaupun belum punya role.
+- Hanya ada satu state, yaitu `active`. `setActive()` mengubahnya, lalu `render()` memperbarui tombol, teks ringkasan, dan grid atau empty state.
+- Klik filter ditangani satu event listener pada daftar tombol (event delegation).
+- Teks role dimasukkan lewat `textContent` dan kartu dibuat dengan `document.createElement`.
 
-Claude Code (Anthropic's AI coding assistant) was used to generate the initial HTML/CSS scaffolding and the JavaScript filtering and rendering logic. The UX details and state handling (active-filter styling, the empty state and its reset flow, responsive breakpoints, keyboard focus behaviour and accessibility attributes) were then reviewed and tested manually.
+## Penggunaan AI
+
+Claude Code dipakai untuk membuat kerangka awal HTML/CSS dan logika filter serta render di JavaScript. Detail UX dan state (styling filter aktif, empty state dan tombol reset-nya, breakpoint, fokus keyboard, atribut aksesibilitas) saya cek dan uji sendiri secara manual.

@@ -25,7 +25,8 @@
   --marketing-soft: rgba(236, 208, 154, 0.1);
   --product: #a3d9bf;
   --product-soft: rgba(163, 217, 191, 0.1);
-  --t: 220ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --t: 220ms var(--ease);
 }
 
 :root[data-theme="light"] {
@@ -147,26 +148,31 @@ ul {
   padding-block: 48px 28px;
 }
 
-.theme-toggle {
-  position: absolute;
-  top: 40px;
-  right: 16px;
+.theme-toggle,
+.filter-pill {
   min-height: 40px;
   padding: 8px 16px;
   border: 1px solid var(--border);
   border-radius: var(--pill);
   background: var(--surface);
   color: var(--text);
-  font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
   box-shadow: var(--shadow-sm);
-  transition: border-color var(--t), color var(--t);
 }
 
-.theme-toggle:hover {
+.theme-toggle:hover,
+.filter-pill:hover {
   border-color: var(--primary);
   color: var(--primary);
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 40px;
+  right: 16px;
+  font-size: 0.875rem;
+  transition: border-color var(--t), color var(--t);
 }
 
 .eyebrow {
@@ -202,22 +208,11 @@ ul {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  min-height: 40px;
-  padding: 8px 16px;
-  border: 1px solid var(--border);
-  border-radius: var(--pill);
-  background: var(--surface);
-  color: var(--text);
   font-size: 0.9375rem;
-  font-weight: 500;
-  cursor: pointer;
-  box-shadow: var(--shadow-sm);
   transition: background-color var(--t), border-color var(--t), color var(--t), transform var(--t), box-shadow var(--t);
 }
 
 .filter-pill:hover {
-  border-color: var(--primary);
-  color: var(--primary);
   transform: translateY(-1px);
 }
 
@@ -285,7 +280,7 @@ ul {
   border-radius: var(--radius);
   box-shadow: var(--shadow-sm);
   transition: transform var(--t), box-shadow var(--t), border-color var(--t);
-  animation: fade-up 320ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation: fade-up 320ms var(--ease) both;
   animation-delay: calc(var(--i, 0) * 50ms);
 }
 
@@ -361,14 +356,9 @@ ul {
   margin: 0;
 }
 
-.role-card__meta svg {
+.role-card__meta i {
   width: 16px;
-  height: 16px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  text-align: center;
 }
 
 @keyframes fade-up {
@@ -388,23 +378,20 @@ ul {
   background: var(--surface);
   border: 1px dashed var(--border);
   border-radius: var(--radius);
-  animation: fade-up 320ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation: fade-up 320ms var(--ease) both;
 }
 
 .empty-state__icon {
+  display: grid;
+  place-items: center;
   width: 120px;
   height: 120px;
   margin-bottom: 4px;
-  stroke-width: 3;
-  stroke-linecap: round;
+  border-radius: 50%;
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-size: 3rem;
 }
-
-.es-bg { fill: var(--primary-soft); }
-.es-case { fill: var(--surface); stroke: var(--primary); }
-.es-handle { fill: none; stroke: var(--primary); }
-.es-line { stroke: var(--primary); opacity: 0.35; }
-.es-lens { fill: var(--surface); stroke: var(--text); }
-.es-lens-handle { stroke: var(--text); stroke-width: 4; }
 
 .empty-state__title {
   font-size: 1.25rem;

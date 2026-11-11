@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Browse open roles by department." />
   <title>Role Explorer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
 </head>
@@ -29,15 +30,7 @@
       <ul class="role-grid" id="role-grid"></ul>
 
       <div class="empty-state" id="empty-state" hidden>
-        <svg class="empty-state__icon" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
-          <circle cx="60" cy="60" r="56" class="es-bg" />
-          <rect x="32" y="42" width="56" height="40" rx="6" class="es-case" />
-          <path d="M48 42v-6a4 4 0 0 1 4-4h16a4 4 0 0 1 4 4v6" class="es-handle" />
-          <line x1="32" y1="58" x2="88" y2="58" class="es-line" />
-          <circle cx="84" cy="80" r="13" class="es-bg" />
-          <circle cx="84" cy="80" r="9" class="es-lens" />
-          <line x1="91" y1="87" x2="99" y2="95" class="es-lens-handle" />
-        </svg>
+        <i class="fa-solid fa-briefcase empty-state__icon" aria-hidden="true"></i>
         <h2 class="empty-state__title" id="empty-state-title">No open roles here yet</h2>
         <p class="empty-state__text">We're not hiring in this department right now. Check back soon, or explore other teams.</p>
         <button type="button" class="btn" id="empty-state-reset">View all roles</button>
