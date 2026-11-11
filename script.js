@@ -174,5 +174,12 @@ $("empty-state-reset").addEventListener("click", () => {
   filterList.querySelector(".filter-pill").focus();
 });
 
+$("theme-toggle").addEventListener("click", (event) => {
+  const isLight = document.documentElement.dataset.theme !== "light";
+  document.documentElement.dataset.theme = isLight ? "light" : "dark";
+  event.currentTarget.textContent = isLight ? "☾ Dark" : "☀ Light";
+  event.currentTarget.setAttribute("aria-label", `Switch to ${isLight ? "dark" : "light"} theme`);
+});
+
 renderFilters();
 render();
